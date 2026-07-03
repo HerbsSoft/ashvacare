@@ -618,76 +618,345 @@
             50% { box-shadow: 0 0 0 8px rgba(76,175,80,0); }
         }
 
-        /* ==================== VIDEO SECTION ==================== */
-        .video-section {
+        /* ==================== VIDEO CAROUSEL SECTION ==================== */
+        .video-carousel-section {
             background: var(--white);
+            padding: 60px 0;
         }
 
-        .video-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            max-width: 900px;
+        .carousel-wrapper {
+            max-width: 450px;
             margin: 0 auto;
+            position: relative;
         }
 
-        .video-card {
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow);
+        .carousel-container {
             position: relative;
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
             background: #000;
+            aspect-ratio: 9/16;
+            max-height: 600px;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .carousel-slide video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Instagram-style overlay elements */
+        .video-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 60px 15px 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+        }
+
+        .video-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .video-user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--orange);
+            object-fit: cover;
+        }
+
+        .video-user-name {
+            color: var(--white);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .video-caption {
+            color: var(--white);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .video-caption .hashtag {
+            color: #5BC0DE;
+            font-weight: 600;
+        }
+
+        .video-stats {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--white);
+            font-size: 0.8rem;
+        }
+
+        .video-stats span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Right side icons (Instagram style) */
+        .video-actions {
+            position: absolute;
+            right: 12px;
+            bottom: 120px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .action-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
             cursor: pointer;
         }
 
-        .video-card img {
-            width: 100%;
-            aspect-ratio: 16/9;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-
-        .video-card:hover img {
-            transform: scale(1.05);
-            opacity: 0.8;
-        }
-
-        .video-play-overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0,0,0,0.3);
-        }
-
-        .video-play-btn {
-            width: 65px; height: 65px;
-            background: var(--orange);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .action-btn i {
             font-size: 1.5rem;
             color: var(--white);
             transition: var(--transition);
-            box-shadow: 0 4px 20px rgba(255,107,0,0.5);
         }
 
-        .video-card:hover .video-play-btn {
-            transform: scale(1.15);
-        }
-
-        .video-label {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            background: rgba(0,0,0,0.7);
+        .action-btn span {
             color: var(--white);
-            padding: 4px 12px;
-            border-radius: 50px;
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             font-weight: 600;
+        }
+
+        .action-btn:hover i {
+            transform: scale(1.2);
+        }
+
+        .action-btn.like.active i {
+            color: #ED4956;
+        }
+
+        /* Progress bar */
+        .carousel-progress {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            gap: 3px;
+            z-index: 10;
+        }
+
+        .progress-dot {
+            flex: 1;
+            height: 3px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-dot.active {
+            background: var(--white);
+        }
+
+        .progress-dot .progress-fill {
+            height: 100%;
+            background: var(--orange);
+            width: 0%;
+            animation: progress linear forwards;
+        }
+
+        @keyframes progress {
+            to { width: 100%; }
+        }
+
+        /* Navigation arrows */
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(0,0,0,0.5);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 20;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-nav:hover {
+            background: rgba(255,107,0,0.8);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-nav.prev { left: -50px; }
+        .carousel-nav.next { right: -50px; }
+
+        /* Thumbnails navigation */
+        .carousel-thumbnails {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .thumb-btn {
+            width: 60px;
+            height: 90px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            background: #000;
+        }
+
+        .thumb-btn img,
+        .thumb-btn video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .thumb-btn.active {
+            border-color: var(--orange);
+            transform: scale(1.05);
+        }
+
+        .thumb-btn:hover {
+            border-color: var(--orange-light);
+        }
+
+        .thumb-indicator {
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 0.6rem;
+            font-weight: 700;
+            background: rgba(0,0,0,0.6);
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        /* Carousel dots for mobile */
+        .carousel-dots {
+            display: none;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .carousel-dots .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ccc;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .carousel-dots .dot.active {
+            background: var(--orange);
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        /* Play/Pause button */
+        .play-pause-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255,107,0,0.8);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.3rem;
+            cursor: pointer;
+            z-index: 15;
+            transition: var(--transition);
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-container:hover .play-pause-btn {
+            display: flex;
+        }
+
+        .play-pause-btn:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            background: var(--orange);
+        }
+
+        /* Sound toggle */
+        .sound-toggle {
+            position: absolute;
+            top: 50px;
+            right: 10px;
+            background: rgba(0,0,0,0.5);
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            color: white;
+            font-size: 0.9rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sound-toggle:hover {
+            background: rgba(255,107,0,0.8);
+        }
+
+        .sound-toggle.muted i {
+            color: #999;
+        }
+
+        @media (max-width: 640px) {
+            .carousel-wrapper { max-width: 100%; }
+            .carousel-container {
+                border-radius: 0;
+                max-height: none;
+                aspect-ratio: 9/16;
+            }
+            .carousel-nav { display: none; }
+            .carousel-dots { display: flex; }
+            .carousel-thumbnails { display: none; }
         }
 
         /* ==================== PROBLEM SECTION ==================== */
@@ -2088,28 +2357,202 @@
         </div>
     </div>
 
-    <!-- ==================== VIDEO SECTION ==================== -->
-    <section class="section video-section" id="video">
+    <!-- ==================== VIDEO CAROUSEL SECTION ==================== -->
+    <section class="video-carousel-section" id="video">
         <div class="container">
             <div class="section-header fade-up">
                 <div class="section-tag"><i class="fas fa-video"></i> वीडियो देखें</div>
                 <h2 class="section-title">देखें — <span>Madhu Shant</span> कैसे बदलाव लाता है</h2>
                 <p class="section-subtitle">असली ग्राहकों के अनुभव और प्रोडक्ट डेमो</p>
             </div>
-            <div class="video-grid fade-up">
-                <div class="video-card" onclick="playVideo(this, 'dQw4w9WgXcQ')">
-                    <img src="7.webp" alt="Customer Testimonial Video">
-                    <div class="video-play-overlay">
-                        <div class="video-play-btn"><i class="fas fa-play"></i></div>
+            
+            <div class="carousel-wrapper fade-up">
+                <!-- Navigation Arrows -->
+                <button class="carousel-nav prev" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-nav next" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
+                
+                <!-- Main Carousel -->
+                <div class="carousel-container" id="carouselContainer">
+                    <div class="carousel-progress">
+                        <div class="progress-dot active"><div class="progress-fill"></div></div>
+                        <div class="progress-dot"><div class="progress-fill"></div></div>
+                        <div class="progress-dot"><div class="progress-fill"></div></div>
+                        <div class="progress-dot"><div class="progress-fill"></div></div>
                     </div>
-                    <span class="video-label">ग्राहक अनुभव</span>
+                    
+                    <div class="sound-toggle" id="soundToggle" onclick="toggleSound()">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                    
+                    <button class="play-pause-btn" id="playPauseBtn" onclick="togglePlayPause()">
+                        <i class="fas fa-pause"></i>
+                    </button>
+                    
+                    <div class="carousel-track" id="carouselTrack">
+                        <!-- Slide 1 -->
+                        <div class="carousel-slide" data-video="video1.mp4" data-autoplay="true">
+                            <video id="video1" src="video4.mp4" muted playsinline loop></video>
+                            <div class="video-overlay">
+                                <div class="video-user">
+                                    <img src="manoj.jpg" alt="User" class="video-user-avatar">
+                                    <span class="video-user-name">@iammanojbakshi_</span>
+                                </div>
+                                <p class="video-caption">
+                                    मेरी शुगर 220 से 140 तक आई! 🎉 
+                                    <span class="hashtag">#MadhuShant</span> <span class="hashtag">#DiabetesCare</span> <span class="hashtag">#HealthJourney</span>
+                                </p>
+                                <div class="video-stats">
+                                    <span><i class="fas fa-heart"></i> 8.8K</span>
+                                    <span><i class="fas fa-comment"></i> 156</span>
+                                    <span><i class="fas fa-share"></i> Share</span>
+                                </div>
+                            </div>
+                            <div class="video-actions">
+                                <div class="action-btn like" onclick="toggleLike(this)">
+                                    <i class="fas fa-heart"></i>
+                                    <span>2.8K</span>
+                                </div>
+                                <div class="action-btn">
+                                    <i class="fas fa-comment"></i>
+                                    <span>156</span>
+                                </div>
+                                <div class="action-btn">
+                                    <i class="fas fa-share"></i>
+                                    <span>Share</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 2 -->
+                        <div class="carousel-slide" data-video="video2.mp4" data-autoplay="true">
+                            <video id="video2" src="video2.mp4" muted playsinline loop></video>
+                            <div class="video-overlay">
+                                <div class="video-user">
+                                    <img src="mohit.png" alt="User" class="video-user-avatar">
+                                    <span class="video-user-name">@ashva_ayurveda</span>
+                                </div>
+                                <p class="video-caption">
+                                    3 महीने में दिखा बदलाव! 💪
+                                    <span class="hashtag">#SugarControl</span> <span class="hashtag">#MadhuShant</span> <span class="hashtag">#NaturalHealth</span>
+                                </p>
+                                <div class="video-stats">
+                                    <span><i class="fas fa-heart"></i> 3.9K</span>
+                                    <span><i class="fas fa-comment"></i> 89</span>
+                                    <span><i class="fas fa-share"></i> Share</span>
+                                </div>
+                            </div>
+                            <div class="video-actions">
+                                <div class="action-btn like" onclick="toggleLike(this)">
+                                    <i class="fas fa-heart"></i>
+                                    <span>1.9K</span>
+                                </div>
+                                <div class="action-btn">
+                                    <i class="fas fa-comment"></i>
+                                    <span>89</span>
+                                </div>
+                                <div class="action-btn">
+                                    <i class="fas fa-share"></i>
+                                    <span>Share</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 3 -->
+                        <div class="carousel-slide" data-video="video1.mp4" data-autoplay="true">
+                            <video id="video3" src="video1.mp4" muted playsinline loop></video>
+                            <div class="video-overlay">
+                                <div class="video-user">
+                                    <img src="mohit.png" alt="User" class="video-user-avatar">
+                                    <span class="video-user-name">@ashva_ayurveda</span>
+                                </div>
+                                <p class="video-caption">
+                                    Doctor ne bhi manaaya! 👍
+                                    <span class="hashtag">#MadhuShantSuccess</span> <span class="hashtag">#GermanFormula</span> <span class="hashtag">#Wellness</span>
+                                </p>
+                                <div class="video-stats">
+                                    <span><i class="fas fa-heart"></i> 3.1K</span>
+                                    <span><i class="fas fa-comment"></i> 203</span>
+                                    <span><i class="fas fa-share"></i> Share</span>
+                                </div>
+                            </div>
+                            <div class="video-actions">
+                                <div class="action-btn like" onclick="toggleLike(this)">
+                                    <i class="fas fa-heart"></i>
+                                    <span>3.1K</span>
+                                </div>
+                                <div class="action-btn">
+                                    <i class="fas fa-comment"></i>
+                                    <span>203</span>
+                                </div>
+                                <div class="action-btn">
+                                    <i class="fas fa-share"></i>
+                                    <span>Share</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 4 -->
+                        <div class="carousel-slide" data-video="video2.mp4" data-autoplay="true">
+                            <video id="video4" src="video3.mp4" muted playsinline loop></video>
+                            <div class="video-overlay">
+                                <div class="video-user">
+                                    <img src="priya.png" alt="User" class="video-user-avatar">
+                                    <span class="video-user-name">@priya_singh</span>
+                                </div>
+                                <p class="video-caption">
+                                    60+ ki umar mein bhi energy! ⚡
+                                    <span class="hashtag">#MadhuShantReview</span> <span class="hashtag">#SeniorHealth</span> <span class="hashtag">#NaturalCare</span>
+                                </p>
+                                <div class="video-stats">
+                                    <span><i class="fas fa-heart"></i> 1.5K</span>
+                                    <span><i class="fas fa-comment"></i> 67</span>
+                                    <span><i class="fas fa-share"></i> Share</span>
+                                </div>
+                            </div>
+                            <div class="video-actions">
+                                <div class="action-btn like" onclick="toggleLike(this)">
+                                    <i class="fas fa-heart"></i>
+                                    <span>1.5K</span>
+                                </div>
+                                <div class="action-btn">
+                                    <i class="fas fa-comment"></i>
+                                    <span>67</span>
+                                </div>
+                                <div class="action-btn">
+                                    <i class="fas fa-share"></i>
+                                    <span>Share</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="video-card" onclick="playVideo(this, 'dQw4w9WgXcQ')">
-                    <img src="sc5-img4.webp" alt="Product Demo Video">
-                    <div class="video-play-overlay">
-                        <div class="video-play-btn"><i class="fas fa-play"></i></div>
-                    </div>
-                    <span class="video-label">प्रोडक्ट डेमो</span>
+                
+                <!-- Thumbnails -->
+                <div class="carousel-thumbnails">
+                    <button class="thumb-btn active" onclick="goToSlide(0)">
+                        <video src="video4.mp4" muted></video>
+                        <span class="thumb-indicator">1</span>
+                    </button>
+                    <button class="thumb-btn" onclick="goToSlide(1)">
+                        <video src="video2.mp4" muted></video>
+                        <span class="thumb-indicator">2</span>
+                    </button>
+                    <button class="thumb-btn" onclick="goToSlide(2)">
+                        <video src="video1.mp4" muted></video>
+                        <span class="thumb-indicator">3</span>
+                    </button>
+                    <button class="thumb-btn" onclick="goToSlide(3)">
+                        <video src="video3.mp4" muted></video>
+                        <span class="thumb-indicator">4</span>
+                    </button>
+                </div>
+                
+                <!-- Dots for mobile -->
+                <div class="carousel-dots">
+                    <span class="dot active" onclick="goToSlide(0)"></span>
+                    <span class="dot" onclick="goToSlide(1)"></span>
+                    <span class="dot" onclick="goToSlide(2)"></span>
+                    <span class="dot" onclick="goToSlide(3)"></span>
                 </div>
             </div>
         </div>
@@ -2602,7 +3045,7 @@
                     <ul class="footer-links">
                         <li><a href="tel:+919217048964"><i class="fas fa-phone"></i> +91 92170 48964</a></li>
                         <li><a href="https://wa.me/919217048964" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
-                        <li><a href="mailto:support@sugardefend.in"><i class="fas fa-envelope"></i> support@sugardefend.in</a></li>
+                        <li><a href="/cdn-cgi/l/email-protection#b3c0c6c3c3dcc1c7f3c0c6d4d2c1d7d6d5d6ddd79ddadd"><i class="fas fa-envelope"></i> <span class="__cf_email__" data-cfemail="1a696f6a6a75686e5a696f7d7b687e7f7c7f747e347374">[email&#160;protected]</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -2686,7 +3129,7 @@
     </div>
 
     <!-- ==================== JAVASCRIPT ==================== -->
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // ==================== CONFIG ====================
         const SHEET_URL = 'https://script.google.com/macros/s/AKfycbz1Sk2Ui_ySDD-q5g9n91d4UM1wOx1A4NWNwRzS-npD4TbefW0IZAiG7IBHEHhpJiWb/exec';
         const PHONE = '919217048964';
@@ -2862,10 +3305,205 @@
         const spStrip = document.querySelector('.social-proof-strip');
         if (spStrip) counterObs.observe(spStrip);
 
-        // ==================== VIDEO PLAYER ====================
-        function playVideo(card, videoId) {
-            card.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="aspect-ratio:16/9;"></iframe>`;
+        // ==================== VIDEO CAROUSEL ====================
+        let currentSlide = 0;
+        const totalSlides = 4;
+        let isPlaying = true;
+        let isMuted = true;
+        let progressInterval;
+        let slideDurations = [8000, 8000, 8000, 8000]; // 8 seconds per slide
+        let currentProgress = 0;
+
+        function initCarousel() {
+            const container = document.getElementById('carouselContainer');
+            const videos = document.querySelectorAll('.carousel-slide video');
+            
+            // Intersection Observer to handle autoplay when visible
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        playCurrentVideo();
+                    } else {
+                        pauseAllVideos();
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            if (container) observer.observe(container);
+            
+            // Start autoplay
+            playCurrentVideo();
+            startProgressBar();
         }
+
+        function playCurrentVideo() {
+            const videos = document.querySelectorAll('.carousel-slide video');
+            videos.forEach((v, i) => {
+                if (i === currentSlide) {
+                    v.play().catch(e => console.log('Autoplay prevented'));
+                } else {
+                    v.pause();
+                }
+            });
+            isPlaying = true;
+            updatePlayPauseBtn();
+        }
+
+        function pauseAllVideos() {
+            const videos = document.querySelectorAll('.carousel-slide video');
+            videos.forEach(v => v.pause());
+            isPlaying = false;
+            updatePlayPauseBtn();
+        }
+
+        function goToSlide(index) {
+            if (index < 0) index = totalSlides - 1;
+            if (index >= totalSlides) index = 0;
+            
+            currentSlide = index;
+            const track = document.getElementById('carouselTrack');
+            if (track) {
+                track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            }
+            
+            // Update thumbnails
+            document.querySelectorAll('.thumb-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i === currentSlide);
+            });
+            
+            // Update dots
+            document.querySelectorAll('.carousel-dots .dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+            
+            // Update progress bar dots
+            document.querySelectorAll('.progress-dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+            
+            // Reset and play current video
+            resetProgressBar();
+            playCurrentVideo();
+        }
+
+        function nextSlide() {
+            goToSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            goToSlide(currentSlide - 1);
+        }
+
+        function togglePlayPause() {
+            const videos = document.querySelectorAll('.carousel-slide video');
+            if (isPlaying) {
+                videos[currentSlide].pause();
+                isPlaying = false;
+                clearInterval(progressInterval);
+            } else {
+                videos[currentSlide].play();
+                isPlaying = true;
+                startProgressBar();
+            }
+            updatePlayPauseBtn();
+        }
+
+        function updatePlayPauseBtn() {
+            const btn = document.getElementById('playPauseBtn');
+            if (btn) {
+                btn.innerHTML = isPlaying ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
+            }
+        }
+
+        function toggleSound() {
+            const videos = document.querySelectorAll('.carousel-slide video');
+            isMuted = !isMuted;
+            videos.forEach(v => v.muted = isMuted);
+            
+            const toggle = document.getElementById('soundToggle');
+            if (toggle) {
+                toggle.classList.toggle('muted', isMuted);
+                toggle.querySelector('i').className = isMuted ? 'fas fa-volume-mute' : 'fas fa-volume-up';
+            }
+        }
+
+        function toggleLike(btn) {
+            btn.classList.toggle('active');
+            const icon = btn.querySelector('i');
+            if (btn.classList.contains('active')) {
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+            } else {
+                icon.classList.remove('fas');
+                icon.classList.add('far');
+            }
+        }
+
+        function startProgressBar() {
+            clearInterval(progressInterval);
+            currentProgress = 0;
+            
+            const progressFills = document.querySelectorAll('.progress-dot.active .progress-fill');
+            progressFills.forEach(pf => {
+                pf.style.animation = 'none';
+                pf.offsetHeight; // Trigger reflow
+                pf.style.animation = `progress ${slideDurations[currentSlide]}ms linear forwards`;
+            });
+            
+            progressInterval = setInterval(() => {
+                if (isPlaying) {
+                    currentProgress += 100;
+                    if (currentProgress >= slideDurations[currentSlide]) {
+                        nextSlide();
+                    }
+                }
+            }, 100);
+        }
+
+        function resetProgressBar() {
+            clearInterval(progressInterval);
+            currentProgress = 0;
+            document.querySelectorAll('.progress-fill').forEach(pf => {
+                pf.style.animation = 'none';
+                pf.style.width = '0%';
+            });
+            startProgressBar();
+        }
+
+        // Touch/Swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        function setupTouchEvents() {
+            const container = document.getElementById('carouselContainer');
+            if (!container) return;
+            
+            container.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+            
+            container.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
+        }
+
+        function handleSwipe() {
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            initCarousel();
+            setupTouchEvents();
+        });
 
         // ==================== EXIT INTENT ====================
         let exitShown = false;
@@ -2892,5 +3530,5 @@
 
         console.log('%c Madhu Shant Landing Page Loaded! ', 'background: #FF6B00; color: white; font-size: 14px; padding: 5px 10px; border-radius: 5px;');
     </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a1545d29bf206ebe',t:'MTc4MzA2NTcwMw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
