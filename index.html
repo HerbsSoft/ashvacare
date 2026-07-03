@@ -3130,49 +3130,102 @@
         });
 
         // ==================== FORM SUBMIT ====================
-       async function submitLead(e) {
-  e.preventDefault();
+        // Guard flag: prevents a second submit while one is already in-flight
+        // (blocks double-click / double-tap duplicate rows on the sheet)
+        let isSubmitting = false;
 
-  const data = {
-    name: document.getElementById('fname').value.trim(),
-    phone: document.getElementById('fphone').value.trim(),
-    plan: document.getElementById('fplan').value,
-    source: 'sugardefend-landing',
-    page: window.location.href
-    // Note: timestamp is added by Apps Script, no need to send from client
-  };
+        // How long (in ms) we remember a submitted phone number to block
+        // accidental re-submits of the SAME number from this device.
+        const DUPLICATE_BLOCK_WINDOW = 10 * 60 * 1000; // 10 minutes
 
-  // Save locally as backup
-  let leads = JSON.parse(localStorage.getItem('sd_leads') || '[]');
-  leads.push(data);
-  localStorage.setItem('sd_leads', JSON.stringify(leads));
+        function wasRecentlySubmitted(phone) {
+            try {
+                const sent = JSON.parse(localStorage.getItem('sd_sent_phones') || '{}');
+                const last = sent[phone];
+                return last && (Date.now() - last) < DUPLICATE_BLOCK_WINDOW;
+            } catch (e) { return false; }
+        }
 
-  try {
-    // IMPORTANT: Use 'text/plain' to avoid CORS preflight.
-    // With 'no-cors' the response is opaque, but data still reaches the Sheet.
-    await fetch(SHEET_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify(data)
-    });
-  } catch (err) {
-    console.error('Sheet submission error:', err);
-  }
+        function markSubmitted(phone) {
+            try {
+                const sent = JSON.parse(localStorage.getItem('sd_sent_phones') || '{}');
+                sent[phone] = Date.now();
+                localStorage.setItem('sd_sent_phones', JSON.stringify(sent));
+            } catch (e) { /* ignore storage errors */ }
+        }
 
-  // Show success regardless — no-cors hides the response, but data is sent
-  document.getElementById('leadForm').style.display = 'none';
-  document.querySelector('.modal-price-box').style.display = 'none';
-  document.getElementById('formSuccess').style.display = 'block';
+        async function submitLead(e) {
+            e.preventDefault();
 
-  setTimeout(() => {
-    closeModal();
-    document.getElementById('leadForm').style.display = 'block';
-    document.querySelector('.modal-price-box').style.display = 'block';
-    document.getElementById('formSuccess').style.display = 'none';
-    document.getElementById('leadForm').reset();
-  }, 3500);
-}
+            // 1) Block re-entrancy: if a submit is already running, ignore this click
+            if (isSubmitting) return;
+
+            const submitBtn = document.querySelector('#leadForm .form-submit');
+            const phone = document.getElementById('fphone').value.trim();
+
+            // 2) Block accidental duplicate submit of the same number within the window
+            if (wasRecentlySubmitted(phone)) {
+                alert('आपका ऑर्डर पहले ही दर्ज हो चुका है। हम जल्द ही आपसे संपर्क करेंगे।');
+                return;
+            }
+
+            const data = {
+                name: document.getElementById('fname').value.trim(),
+                phone: phone,
+                plan: document.getElementById('fplan').value,
+                source: 'sugardefend-landing',
+                page: window.location.href
+                // Note: timestamp is added by Apps Script, no need to send from client
+            };
+
+            // 3) Lock the button immediately so extra clicks do nothing
+            isSubmitting = true;
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.dataset.origText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> भेजा जा रहा है...';
+            }
+
+            // Save locally as backup
+            let leads = JSON.parse(localStorage.getItem('sd_leads') || '[]');
+            leads.push(data);
+            localStorage.setItem('sd_leads', JSON.stringify(leads));
+
+            try {
+                // IMPORTANT: Use 'text/plain' to avoid CORS preflight.
+                // With 'no-cors' the response is opaque, but data still reaches the Sheet.
+                await fetch(SHEET_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify(data)
+                });
+                // Remember this phone so accidental re-submits are blocked
+                markSubmitted(phone);
+            } catch (err) {
+                console.error('Sheet submission error:', err);
+            }
+
+            // Show success regardless — no-cors hides the response, but data is sent
+            document.getElementById('leadForm').style.display = 'none';
+            document.querySelector('.modal-price-box').style.display = 'none';
+            document.getElementById('formSuccess').style.display = 'block';
+
+            setTimeout(() => {
+                closeModal();
+                document.getElementById('leadForm').style.display = 'block';
+                document.querySelector('.modal-price-box').style.display = 'block';
+                document.getElementById('formSuccess').style.display = 'none';
+                document.getElementById('leadForm').reset();
+
+                // 4) Unlock button + restore label for the NEXT customer's turn
+                isSubmitting = false;
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = submitBtn.dataset.origText || '<i class="fas fa-shopping-cart"></i> अभी ऑर्डर करें';
+                }
+            }, 3500);
+        }
 
 
         // ==================== COUNTDOWN ====================
