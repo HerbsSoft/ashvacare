@@ -1,24 +1,5 @@
-# 🚀 SugarDefend Pro™ - Ultra High-Converting Landing Page
-
-## 💰 Target: 1 Lakh Orders
-
 ### 📁 Files Structure
-```
-diabetic-landing-page/
-├── index.html              ← Main landing page
-├── google-apps-script.js   ← Google Sheets integration
-├── README.md               ← This file
-└── uploads/
-    ├── ChatGPT_Image_Jun_12_2026_12_59_43_PM.webp  ← Company Logo
-    ├── image.png            ← Product Image
-    ├── qq.webp              ← Quality Badge
-    ├── made in Germany.webp ← Made in Germany Badge
-    ├── sert.webp            ← Lab Certificate
-    ├── 7.webp               ← Video Thumbnail 1
-    ├── sc5-img4.webp        ← Video Thumbnail 2
-    ├── sawdhan.webp         ← Safety/Warning Badge
-    ├── ava1-ava11           ← Customer/Doctor Avatars
-    └── (other images)
+``
 ```
 
 ---
