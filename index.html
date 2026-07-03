@@ -2708,45 +2708,50 @@
         });
 
         // ==================== FORM SUBMIT ====================
-        async function submitLead(e) {
-            e.preventDefault();
-            const data = {
-                name: document.getElementById('fname').value,
-                phone: document.getElementById('fphone').value,
-                plan: document.getElementById('fplan').value,
-                timestamp: new Date().toISOString(),
-                source: 'sugardefend-landing',
-                page: window.location.href
-            };
+       async function submitLead(e) {
+  e.preventDefault();
 
-            // Save locally
-            let leads = JSON.parse(localStorage.getItem('sd_leads') || '[]');
-            leads.push(data);
-            localStorage.setItem('sd_leads', JSON.stringify(leads));
+  const data = {
+    name: document.getElementById('fname').value.trim(),
+    phone: document.getElementById('fphone').value.trim(),
+    plan: document.getElementById('fplan').value,
+    source: 'sugardefend-landing',
+    page: window.location.href
+    // Note: timestamp is added by Apps Script, no need to send from client
+  };
 
-            // Send to Google Sheets
-            try {
-                await fetch(SHEET_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-            } catch (err) { console.log('Sheet save (local):', err); }
+  // Save locally as backup
+  let leads = JSON.parse(localStorage.getItem('sd_leads') || '[]');
+  leads.push(data);
+  localStorage.setItem('sd_leads', JSON.stringify(leads));
 
-            // Show success
-            document.getElementById('leadForm').style.display = 'none';
-            document.querySelector('.modal-price-box').style.display = 'none';
-            document.getElementById('formSuccess').style.display = 'block';
+  try {
+    // IMPORTANT: Use 'text/plain' to avoid CORS preflight.
+    // With 'no-cors' the response is opaque, but data still reaches the Sheet.
+    await fetch(SHEET_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(data)
+    });
+  } catch (err) {
+    console.error('Sheet submission error:', err);
+  }
 
-            setTimeout(() => {
-                closeModal();
-                document.getElementById('leadForm').style.display = 'block';
-                document.querySelector('.modal-price-box').style.display = 'block';
-                document.getElementById('formSuccess').style.display = 'none';
-                document.getElementById('leadForm').reset();
-            }, 3500);
-        }
+  // Show success regardless — no-cors hides the response, but data is sent
+  document.getElementById('leadForm').style.display = 'none';
+  document.querySelector('.modal-price-box').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+
+  setTimeout(() => {
+    closeModal();
+    document.getElementById('leadForm').style.display = 'block';
+    document.querySelector('.modal-price-box').style.display = 'block';
+    document.getElementById('formSuccess').style.display = 'none';
+    document.getElementById('leadForm').reset();
+  }, 3500);
+}
+
 
         // ==================== COUNTDOWN ====================
         (function() {
