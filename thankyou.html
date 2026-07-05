@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed - Premium Male Enhancement</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .thankyou-container {
+            background: white;
+            border-radius: 30px;
+            padding: 50px 45px;
+            max-width: 550px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 
+                0 30px 80px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .thankyou-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #4caf50, #8bc34a, #4caf50);
+        }
+
+        .success-animation {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 35px;
+        }
+
+        .success-circle {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #4caf50 0%, #8bc34a 100%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .checkmark {
+            font-size: 80px;
+            color: white;
+            animation: drawCheck 0.5s ease-out 0.3s both;
+        }
+
+        @keyframes drawCheck {
+            0% {
+                transform: scale(0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .confetti span {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: fall 3s linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-150px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(150px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        h1 {
+            color: #4caf50;
+            font-size: 36px;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            color: #666;
+            font-size: 17px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .expert-call-box {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid #2196f3;
+        }
+
+        .expert-call-box .icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .expert-call-box h3 {
+            color: #1565c0;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .expert-call-box p {
+            color: #333;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .expert-call-box strong {
+            color: #e94560;
+        }
+
+        .confirmation-amount {
+            background: linear-gradient(135deg, #fff9c4, #fff59d);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 2px solid #ffc107;
+        }
+
+        .confirmation-amount .label {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .confirmation-amount .amount {
+            font-size: 42px;
+            font-weight: 800;
+            color: #e94560;
+            margin: 10px 0;
+        }
+
+        .confirmation-amount .note {
+            color: #856404;
+            font-size: 13px;
+            font-style: normal;
+        }
+
+        .order-status {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .status-title {
+            color: #2e7d32;
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .status-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .status-steps::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 15%;
+            right: 15%;
+            height: 4px;
+            background: #ddd;
+            border-radius: 2px;
+        }
+
+        .step {
+            text-align: center;
+            z-index: 1;
+            flex: 1;
+        }
+
+        .step-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 10px;
+            font-size: 22px;
+            background: white;
+            border: 3px solid #ddd;
+        }
+
+        .step:nth-child(1) .step-icon {
+            border-color: #4caf50;
+            color: #4caf50;
+        }
+
+        .step:nth-child(2) .step-icon {
+            border-color: #ffc107;
+            color: #ffc107;
+        }
+
+        .step:nth-child(3) .step-icon {
+            border-color: #ddd;
+            color: #999;
+        }
+
+        .step-text {
+            font-size: 12px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .next-steps {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .next-steps h4 {
+            color: #333;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .next-steps ul {
+            list-style: none;
+        }
+
+        .next-steps li {
+            color: #555;
+            font-size: 14px;
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .next-steps li .emoji {
+            font-size: 18px;
+        }
+
+        .home-btn {
+            display: inline-block;
+            padding: 18px 50px;
+            background: linear-gradient(135deg, #e94560 0%, #c23152 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: 700;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(233, 69, 96, 0.4);
+        }
+
+        .footer-note {
+            margin-top: 25px;
+            font-size: 12px;
+            color: #999;
+            font-style: italic;
+        }
+
+        @media (max-width: 480px) {
+            .thankyou-container {
+                padding: 35px 25px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            h2 {
+                font-size: 20px;
+            }
+            
+            .confirmation-amount .amount {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="thankyou-container">
+    <div class="success-animation">
+        <div class="success-circle">
+            <span class="checkmark">✓</span>
+        </div>
+        <div class="confetti">
+            <span style="left: 10%; background: #ff6b6b; animation-delay: 0s;"></span>
+            <span style="left: 30%; background: #4caf50; animation-delay: 0.5s;"></span>
+            <span style="left: 50%; background: #ffc107; animation-delay: 1s;"></span>
+            <span style="left: 70%; background: #2196f3; animation-delay: 1.5s;"></span>
+            <span style="left: 90%; background: #9c27b0; animation-delay: 2s;"></span>
+        </div>
+    </div>
+
+    <h1>🎉 बधाई हो!</h1>
+    <h2>आपका फॉर्म सफलतापूर्वक सबमिट हो गया</h2>
+
+    <p class="message">
+        आपका ऑर्डर बुक कर लिया गया है। हमारी टीम जल्द ही आपसे संपर्क करेगी।
+    </p>
+
+    <div class="expert-call-box">
+        <div class="icon">📞</div>
+        <h3>अब क्या होगा?</h3>
+        <p>
+            हमारा <strong>फ्री एक्सपर्ट कॉल</strong> आपको 30 मिनट के अंदर आएगा।<br><br>
+            एक्सपर्ट आपके साथ <strong>ऑर्डर की पुष्टि</strong> करेंगे और 
+            <strong>₹100 की पुष्टि राशि</strong> लेंगे।
+        </p>
+    </div>
+
+    <div class="confirmation-amount">
+        <div class="label">कॉल पर पुष्टि राशि</div>
+        <div class="amount">₹100</div>
+        <div class="note">* बाकी राशि डिलीवरी पर दें</div>
+    </div>
+
+    <div class="order-status">
+        <div class="status-title">📦 आपका ऑर्डर स्टेटस</div>
+        <div class="status-steps">
+            <div class="step">
+                <div class="step-icon">✓</div>
+                <div class="step-text">फॉर्म<br>सबमिट</div>
+            </div>
+            <div class="step">
+                <div class="step-icon">📞</div>
+                <div class="step-text">एक्सपर्ट<br>कॉल</div>
+            </div>
+            <div class="step">
+                <div class="step-icon">🚚</div>
+                <div class="step-text">डिलीवरी<br>5-7 दिन</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="next-steps">
+        <h4>📋 अगले कदम:</h4>
+        <ul>
+            <li><span class="emoji">📱</span> अपना फोन हमेशा उपलब्ध रखें</li>
+            <li><span class="emoji">✅</span> एक्सपर्ट की कॉल का इंतज़ार करें</li>
+            <li><span class="emoji">💵</span> ₹100 की पुष्टि राशि तैयार रखें</li>
+            <li><span class="emoji">🎉</span> प्रोडक्ट डिलीवर होने पर मुफ्त में इंजॉय करें!</li>
+        </ul>
+    </div>
+
+    <a href="index.html" class="home-btn">🏠 होम पेज पर जाएं</a>
+
+    <p class="footer-note">
+        आपकी जानकारी पूर्णतः सुरक्षित और गोपनीय है
+    </p>
+</div>
+
+</body>
+</html>
