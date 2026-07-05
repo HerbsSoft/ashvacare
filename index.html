@@ -3260,25 +3260,22 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
                 console.error('Sheet submission error:', err);
             }
 
-            // Show success regardless — no-cors hides the response, but data is sent
-            document.getElementById('leadForm').style.display = 'none';
-            document.querySelector('.modal-price-box').style.display = 'none';
-            document.getElementById('formSuccess').style.display = 'block';
+            // Show success 
+            // Show success
+document.getElementById('leadForm').style.display = 'none';
+document.querySelector('.modal-price-box').style.display = 'none';
+document.getElementById('formSuccess').style.display = 'block';
 
-            setTimeout(() => {
-                closeModal();
-                document.getElementById('leadForm').style.display = 'block';
-                document.querySelector('.modal-price-box').style.display = 'block';
-                document.getElementById('formSuccess').style.display = 'none';
-                document.getElementById('leadForm').reset();
+// Facebook Pixel Purchase Event
+if (typeof fbq !== "undefined") {
+    fbq('track', 'Lead');
+    fbq('track', 'Purchase');
+}
 
-                // 4) Unlock button + restore label for the NEXT customer's turn
-                isSubmitting = false;
-                if (submitBtn) {
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = submitBtn.dataset.origText || '<i class="fas fa-shopping-cart"></i> अभी ऑर्डर करें';
-                }
-            }, 3500);
+// Redirect to Thank You page after 2 seconds
+setTimeout(() => {
+    window.location.href = "thankyou.html";
+}, 2000);
         }
 
 
