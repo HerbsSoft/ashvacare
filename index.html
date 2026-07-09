@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-  <!-- Meta Pixel Code -->
-<script>
+  <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -17,8 +16,7 @@ fbq('track', 'PageView');
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
 /></noscript>
-<!-- End Meta Pixel Code -->
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Madhu Shant - डायबिटीज केयर | 50,000+ भारतीयों का भरोसा</title>
     <meta name="description" content="शुगर मैनेजमेंट के लिए भारत का #1 नेचुरल केयर प्रोडक्ट। Made in Germany फॉर्मूला। अभी ₹3990 की जगह सिर्फ ₹2590 में ऑर्डर करें।">
@@ -1886,6 +1884,8 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
             position: relative;
             transform: scale(0.9);
             transition: transform 0.3s;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .modal-overlay.active .modal { transform: scale(1); }
@@ -1960,8 +1960,10 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
             margin-bottom: 5px;
         }
 
+        /* Updated to include textarea styling */
         .form-group input,
-        .form-group select {
+        .form-group select,
+        .form-group textarea {
             width: 100%;
             padding: 13px 16px;
             border: 2px solid #E0E0E0;
@@ -1972,8 +1974,13 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
             outline: none;
         }
 
+        .form-group textarea {
+            resize: vertical;
+        }
+
         .form-group input:focus,
-        .form-group select:focus {
+        .form-group select:focus,
+        .form-group textarea:focus {
             border-color: var(--orange);
             box-shadow: 0 0 0 3px rgba(255,107,0,0.1);
         }
@@ -2227,7 +2234,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
 </head>
 <body>
 
-    <!-- ==================== URGENCY TOP BAR ==================== -->
     <div class="urgency-bar">
         <div class="container">
             <span>⚡ सीमित ऑफर — 35% छूट!</span>
@@ -2238,7 +2244,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
         </div>
     </div>
 
-    <!-- ==================== STICKY HEADER ==================== -->
     <header class="sticky-header" id="stickyHeader">
         <div class="container">
             <div class="sticky-logo">
@@ -2254,7 +2259,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
         </div>
     </header>
 
-    <!-- ==================== HERO SECTION ==================== -->
     <section class="hero" id="hero">
         <div class="container">
             <div class="hero-grid">
@@ -2325,7 +2329,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
         </div>
     </section>
 
-    <!-- ==================== SOCIAL PROOF STRIP ==================== -->
     <section class="social-proof-strip">
         <div class="container">
             <div class="proof-grid">
@@ -2353,7 +2356,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
         </div>
     </section>
 
-    <!-- ==================== GUARANTEE STRIP ==================== -->
     <section class="guarantee-strip">
         <div class="container">
             <div class="guarantee-row">
@@ -2366,7 +2368,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
         </div>
     </section>
 
-    <!-- ==================== LIVE VISITORS ==================== -->
     <div class="live-visitors">
         <div class="container">
             <div class="live-visitors-inner">
@@ -2376,7 +2377,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
         </div>
     </div>
 
-    <!-- ==================== VIDEO CAROUSEL SECTION ==================== -->
     <section class="video-carousel-section" id="video">
         <div class="container">
             <div class="section-header fade-up">
@@ -2386,11 +2386,9 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
             </div>
             
             <div class="carousel-wrapper fade-up">
-                <!-- Navigation Arrows -->
                 <button class="carousel-nav prev" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></button>
                 <button class="carousel-nav next" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
                 
-                <!-- Main Carousel -->
                 <div class="carousel-container" id="carouselContainer">
                     <div class="carousel-progress">
                         <div class="progress-dot active"><div class="progress-fill"></div></div>
@@ -2408,7 +2406,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
                     </button>
                     
                     <div class="carousel-track" id="carouselTrack">
-                        <!--Slide 5-->
                         <div class="carousel-slide" data-video="Video1.mp4" data-autoplay="true">
                             <video id="video1" src="video5.mp4" muted playsinline loop></video>
                             <div class="video-overlay">
@@ -2441,7 +2438,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
                                 </div>
                             </div>
                         </div>
-                        <!-- Slide 1 -->
                         <div class="carousel-slide" data-video="video4.mp4" data-autoplay="true">
                             <video id="video2" src="video4.mp4" muted playsinline loop></video>
                             <div class="video-overlay">
@@ -2475,7 +2471,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
                             </div>
                         </div>
                         
-                        <!-- Slide 2 -->
                         <div class="carousel-slide" data-video="video2.mp4" data-autoplay="true">
                             <video id="video3" src="video2.mp4" muted playsinline loop></video>
                             <div class="video-overlay">
@@ -2509,7 +2504,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
                             </div>
                         </div>
                         
-                        <!-- Slide 3 -->
                         <div class="carousel-slide" data-video="video1.mp4" data-autoplay="true">
                             <video id="video4" src="video1.mp4" muted playsinline loop></video>
                             <div class="video-overlay">
@@ -2543,7 +2537,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
                             </div>
                         </div>
                         
-                        <!-- Slide 4 -->
                         <div class="carousel-slide" data-video="video3.mp4" data-autoplay="true">
                             <video id="video5" src="video3.mp4" muted playsinline loop></video>
                             <div class="video-overlay">
@@ -2579,7 +2572,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
                     </div>
                 </div>
                 
-                <!-- Thumbnails -->
                 <div class="carousel-thumbnails">
                     <button class="thumb-btn active" onclick="goToSlide(0)">
                         <video src="Video5.mp4" muted></video>
@@ -2603,7 +2595,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
                     </button>
                 </div>
                 
-                <!-- Dots for mobile -->
                 <div class="carousel-dots">
                     <span class="dot active" onclick="goToSlide(0)"></span>
                     <span class="dot" onclick="goToSlide(1)"></span>
@@ -2614,7 +2605,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
         </div>
     </section>
 
-    <!-- ==================== CERTIFICATIONS ==================== -->
     <section class="certifications-section">
         <div class="container">
             <div class="cert-grid fade-up">
@@ -2638,7 +2628,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
         </div>
     </section>
 
-    <!-- ==================== PROBLEM SECTION ==================== -->
     <section class="section problem-section" id="problem">
         <div class="container">
             <div class="section-header fade-up">
@@ -2688,7 +2677,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
         </div>
     </section>
 
-    <!-- ==================== TRANSFORMATION SECTION ==================== -->
     <section class="section transform-section" id="transform">
         <div class="container">
             <div class="section-header fade-up">
@@ -2741,7 +2729,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
         </div>
     </section>
 
-    <!-- ==================== HOW IT WORKS ==================== -->
     <section class="section how-section" id="howItWorks">
         <div class="container">
             <div class="section-header fade-up">
@@ -2768,7 +2755,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
         </div>
     </section>
 
-    <!-- ==================== FEATURES ==================== -->
     <section class="section features-section" id="features">
         <div class="container">
             <div class="section-header fade-up">
@@ -2800,7 +2786,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
         </div>
     </section>
 
-    <!-- ==================== TESTIMONIALS ==================== -->
     <section class="section testimonials-section" id="testimonials">
         <div class="container">
             <div class="section-header fade-up">
@@ -2893,7 +2878,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
                     <p class="t-time">4 दिन पहले • 654 लोगों को मददगार लगा</p>
                 </div>
 
-                <!-- Doctor Card -->
                 <div class="doctor-card">
                     <div class="doctor-img-wrap">
                         <img src="ava11.webp" alt="डॉ. अनिल वर्मा" class="doctor-img">
@@ -2909,7 +2893,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
         </div>
     </section>
 
-    <!-- ==================== COMPARISON TABLE ==================== -->
     <section class="section comparison-section" id="comparison">
         <div class="container">
             <div class="section-header fade-up">
@@ -2942,7 +2925,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
         </div>
     </section>
 
-    <!-- ==================== PRICING ==================== -->
     <section class="section pricing-section" id="pricing">
         <div class="container">
             <div class="section-header fade-up">
@@ -2951,7 +2933,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
                 <p class="section-subtitle">जितना बड़ा प्लान, उतनी ज़्यादा बचत + फ्री गिफ्ट्स!</p>
             </div>
             <div class="pricing-grid">
-                <!-- Monthly (Popular) -->
                 <div class="pricing-card popular fade-up">
                     <div class="pricing-body">
                         <div class="p-name">मंथली प्लान ⭐</div>
@@ -2975,7 +2956,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
                     </div>
                 </div>
 
-                <!-- Combo -->
                 <div class="pricing-card fade-up">
                     <div class="pricing-body">
                         <div class="p-name">3-महीना कॉम्बो ⭐</div>
@@ -3003,7 +2983,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
         </div>
     </section>
 
-    <!-- ==================== FAQ ==================== -->
     <section class="section faq-section" id="faq">
         <div class="container">
             <div class="section-header fade-up">
@@ -3039,7 +3018,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
         </div>
     </section>
 
-    <!-- ==================== FINAL CTA ==================== -->
     <section class="final-cta" id="finalCta">
         <div class="container">
             <h2 class="fade-up">अभी शुरू करें — ₹3,990 की जगह <br>सिर्फ ₹2,590 में!</h2>
@@ -3056,7 +3034,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
         </div>
     </section>
 
-    <!-- ==================== FOOTER ==================== -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -3092,7 +3069,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
         </div>
     </footer>
 
-    <!-- ==================== MODAL ==================== -->
     <div class="modal-overlay" id="leadModal">
         <div class="modal">
             <button class="modal-close" onclick="closeModal()">&times;</button>
@@ -3108,15 +3084,19 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
             </div>
             <form id="leadForm" onsubmit="submitLead(event)">
                 <div class="form-group">
-                    <label>आपका नाम *</label>
+                    <label>आपका नाम (Name) *</label>
                     <input type="text" id="fname" placeholder="जैसे: राजेश कुमार" required>
                 </div>
                 <div class="form-group">
-                    <label>WhatsApp नंबर *</label>
+                    <label>WhatsApp नंबर (Number) *</label>
                     <input type="tel" id="fphone" placeholder="जैसे: 9876543210" pattern="[0-9]{10}" required>
                 </div>
                 <div class="form-group">
-                    <label>कौन सा प्लान?</label>
+                    <label>पूरा पता (Address) *</label>
+                    <textarea id="faddress" placeholder="जैसे: मकान नंबर, गली, शहर, पिन कोड..." rows="2" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>कौन सा प्लान? (Plan)</label>
                     <select id="fplan">
                         <option value="monthly" selected>⭐ मंथली — ₹2,590 (30 दिन) BESTSELLER</option>
                         <option value="combo">कॉम्बो — ₹6,000 (90 दिन + फ्री गिफ्ट)</option>
@@ -3133,7 +3113,6 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
         </div>
     </div>
 
-    <!-- ==================== SALES ALERT ==================== -->
     <div class="sales-alert" id="salesAlert">
         <img class="sa-img" id="saImg" src="ava5.jpg" alt="">
         <div class="sa-content">
@@ -3143,14 +3122,12 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
         <button class="sa-close" onclick="hideAlert()">&times;</button>
     </div>
 
-    <!-- ==================== FLOATING BUTTONS ==================== -->
     <div class="floating-btns">
         <a href="https://wa.me/919289856759?text=नमस्ते!%20मुझे%20SugarDefend%20Pro™%20के%20बारे%20में%20जानकारी%20चाहिए।" target="_blank" class="f-btn wa" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
         <a href="tel:+919289856759" class="f-btn call" title="कॉल करें"><i class="fas fa-phone"></i></a>
         <button class="f-btn ord" onclick="openModal()" title="ऑर्डर करें">ORDER</button>
     </div>
 
-    <!-- ==================== BOTTOM STRIP ==================== -->
     <div class="bottom-strip" id="bottomStrip">
         <div class="container">
             <div class="bs-price">
@@ -3161,8 +3138,8 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
         </div>
     </div>
 
-    <!-- ==================== JAVASCRIPT ==================== -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
         // ==================== CONFIG ====================
         const SHEET_URL = 'https://script.google.com/macros/s/AKfycbz1Sk2Ui_ySDD-q5g9n91d4UM1wOx1A4NWNwRzS-npD4TbefW0IZAiG7IBHEHhpJiWb/exec';
         const PHONE = '919289856759';
@@ -3183,20 +3160,15 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
             if (e.target === this) closeModal();
         });
 
-        // ==================== FORM SUBMIT ====================
-        // Guard flag: prevents a second submit while one is already in-flight
-        // (blocks double-click / double-tap duplicate rows on the sheet)
+        // ==================== FORM SUBMIT (UPDATED LOGIC) ====================
         let isSubmitting = false;
 
-        // How long (in ms) we remember a submitted phone number to block
-        // accidental re-submits of the SAME number from this device.
-        const DUPLICATE_BLOCK_WINDOW = 10 * 60 * 1000; // 10 minutes
-
-        function wasRecentlySubmitted(phone) {
+        // One-time submission logic based on phone number
+        function hasBeenSubmitted(phone) {
             try {
                 const sent = JSON.parse(localStorage.getItem('sd_sent_phones') || '{}');
-                const last = sent[phone];
-                return last && (Date.now() - last) < DUPLICATE_BLOCK_WINDOW;
+                // Check if this phone number exists in our local storage history
+                return !!sent[phone];
             } catch (e) { return false; }
         }
 
@@ -3211,28 +3183,27 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
         async function submitLead(e) {
             e.preventDefault();
 
-            // 1) Block re-entrancy: if a submit is already running, ignore this click
             if (isSubmitting) return;
 
             const submitBtn = document.querySelector('#leadForm .form-submit');
             const phone = document.getElementById('fphone').value.trim();
 
-            // 2) Block accidental duplicate submit of the same number within the window
-            if (wasRecentlySubmitted(phone)) {
-                alert('आपका ऑर्डर पहले ही दर्ज हो चुका है। हम जल्द ही आपसे संपर्क करेंगे।');
+            // Strictly check for duplicate submissions for the same number
+            if (hasBeenSubmitted(phone)) {
+                alert('इस नंबर से आपका ऑर्डर पहले ही दर्ज हो चुका है। हम जल्द ही आपसे संपर्क करेंगे।');
                 return;
             }
 
+            // Added Address Field to Payload
             const data = {
                 name: document.getElementById('fname').value.trim(),
                 phone: phone,
+                address: document.getElementById('faddress').value.trim(),
                 plan: document.getElementById('fplan').value,
                 source: 'sugardefend-landing',
                 page: window.location.href
-                // Note: timestamp is added by Apps Script, no need to send from client
             };
 
-            // 3) Lock the button immediately so extra clicks do nothing
             isSubmitting = true;
             if (submitBtn) {
                 submitBtn.disabled = true;
@@ -3246,38 +3217,35 @@ src="https://www.facebook.com/tr?id=1332034312409691&ev=PageView&noscript=1"
             localStorage.setItem('sd_leads', JSON.stringify(leads));
 
             try {
-                // IMPORTANT: Use 'text/plain' to avoid CORS preflight.
-                // With 'no-cors' the response is opaque, but data still reaches the Sheet.
                 await fetch(SHEET_URL, {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: { 'Content-Type': 'text/plain' },
                     body: JSON.stringify(data)
                 });
-                // Remember this phone so accidental re-submits are blocked
+                
+                // Mark this phone number permanently so user can't spam
                 markSubmitted(phone);
             } catch (err) {
                 console.error('Sheet submission error:', err);
             }
 
-            // Show success 
             // Show success
-document.getElementById('leadForm').style.display = 'none';
-document.querySelector('.modal-price-box').style.display = 'none';
-document.getElementById('formSuccess').style.display = 'block';
+            document.getElementById('leadForm').style.display = 'none';
+            document.querySelector('.modal-price-box').style.display = 'none';
+            document.getElementById('formSuccess').style.display = 'block';
 
-// Facebook Pixel Purchase Event
-if (typeof fbq !== "undefined") {
-    fbq('track', 'Lead');
-    fbq('track', 'Purchase');
-}
+            // Facebook Pixel Purchase Event
+            if (typeof fbq !== "undefined") {
+                fbq('track', 'Lead');
+                fbq('track', 'Purchase');
+            }
 
-// Redirect to Thank You page after 2 seconds
-setTimeout(() => {
-    window.location.href = "thankyou.html";
-}, 2000);
+            // Redirect to Thank You page after 2 seconds
+            setTimeout(() => {
+                window.location.href = "thankyou.html";
+            }, 2000);
         }
-
 
         // ==================== COUNTDOWN ====================
         (function() {
